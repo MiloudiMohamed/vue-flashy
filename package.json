@@ -1,6 +1,6 @@
 {
   "name": "vue-flashy",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Beautiful flash component build with VueJs and Tailwindcss",
   "main": "src/flashy.js",
   "scripts": {
