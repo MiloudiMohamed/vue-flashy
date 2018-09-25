@@ -9,8 +9,8 @@ const Flashy = {
 
     Vue.prototype.$flashy = {
 
-      push (message, theme = 'primary') {
-        Flashy.event.$emit('show', message, theme)
+      push (message, theme = 'primary', title) {
+        Flashy.event.$emit('show', message, theme, title)
       }
     }
     Vue.mixin({})

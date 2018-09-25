@@ -1,22 +1,28 @@
 <template>
-  <transition name="slide-fade">
-    <div
-      v-if='show'
-      class="fixed pin-b pin-r mr-8 mb-6 py-3 px-4 rounded-md border shadow shadow rounded-md"
-      :class="[themes[theme], font]"
-    >{{ message }}
-    </div>
-  </transition>
+  <div class="w-full flex flex-col items-end fixed pin-b pin-r mr-8">
+    <alert
+      v-for="(alert, index) in queue"
+      :key="index"
+      :alert="alert"
+      :styles="styles"
+      :delay="delay"
+    ></alert>
+  </div>
 
 </template>
 
 <script>
 
 import Flash from './flashy.js'
+import Alert from './Alert.vue'
 
 export default {
+  components: {
+    Alert
+  },
+
   props: {
-    font: {
+    styles: {
       type: String,
       default: ''
     },
@@ -29,51 +35,20 @@ export default {
 
   data () {
     return {
-      show: false,
-      theme: 'success',
-      message: null,
-      themes: {
-        'primary': 'bg-blue text-white',
-        'success': 'bg-green text-white',
-        'danger': 'bg-red text-white',
-        'warning': 'bg-orange text-white',
-        'grey': 'bg-grey-darkest text-white',
-        'light': 'bg-white text-grey-darkest'
-      }
+      queue: []
     }
   },
 
   methods: {
-    showFlashy (message, theme) {
-      this.show = true
-      this.message = message
-      this.theme = theme
-
-      this.hide()
-    },
-
-    hide () {
-      setTimeout(() => {
-        this.show = false
-      }, this.delay)
+    addToQueue (message, theme, title) {
+      this.$nextTick(() => {
+        this.queue.push([message, theme, title])
+      }, 100)
     }
   },
 
   mounted () {
-    Flash.event.$on('show', this.showFlashy)
+    Flash.event.$on('show', this.addToQueue)
   }
 }
 </script>
-
-<style>
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-</style>
