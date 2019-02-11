@@ -1,4 +1,4 @@
-import FlashyComponent from './flashy.vue'
+import FlashyComponent from './Flashy.vue'
 
 const Flashy = {
 

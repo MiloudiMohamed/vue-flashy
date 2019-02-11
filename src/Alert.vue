@@ -30,7 +30,6 @@ export default {
   data () {
     return {
       show: true,
-
       themes: {
         'primary': 'bg-blue text-white',
         'success': 'bg-green text-white',
@@ -58,10 +57,10 @@ export default {
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
 </style>
